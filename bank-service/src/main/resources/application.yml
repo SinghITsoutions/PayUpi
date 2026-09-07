@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: bank-service
+
+
+  # Database Connection Configuration
+
+  datasource:
+    url: ${{SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+
+
+  # JPA & Hibernate Configuration
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+
+    # a dialect tells Hibernate how to generate SQL queries for a specific database.
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    database: POSTGRESQL
+
+    # Run data.sql after Hibernate creates the tables
+    defer-datasource-initialization: true
+
+
+
+
+  # SQL Initialization
+  sql:
+    init:
+      mode: always
+
+
+
+
+server:
+  port: 8082
