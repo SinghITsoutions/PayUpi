@@ -19,7 +19,7 @@
     <packaging>pom</packaging>
 
     <modules>
-<!--        <module>api-gateway</module>-->
+        <module>api-gateway</module>
         <module>user-service</module>
         <module>bank-service</module>
         <module>transaction-service</module>
