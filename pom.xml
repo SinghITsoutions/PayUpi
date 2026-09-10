@@ -23,7 +23,7 @@
         <module>user-service</module>
         <module>bank-service</module>
 <!--        <module>transaction-service</module>-->
-<!--        <module>notification-service</module>-->
+        <module>notification-service</module>
     </modules>
 
     <properties>
