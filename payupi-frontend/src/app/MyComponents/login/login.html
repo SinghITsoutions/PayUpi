@@ -1,0 +1,117 @@
+<!-- Top Navbar -->
+<div class="navbar">
+  <div class="navbar-right">
+    <button class="nav-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+      English
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <button class="nav-btn">
+      <svg width="22" height="15" viewBox="0 0 22 15" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;border:0.5px solid #dadce0;">
+        <rect width="22" height="5" y="0"  fill="#FF9933"/>
+        <rect width="22" height="5" y="5"  fill="#FFFFFF"/>
+        <rect width="22" height="5" y="10" fill="#138808"/>
+        <circle cx="11" cy="7.5" r="2.2" fill="none" stroke="#000080" stroke-width="0.4"/>
+        <circle cx="11" cy="7.5" r="0.35" fill="#000080"/>
+        <g stroke="#000080" stroke-width="0.3">
+          <line x1="11" y1="5.3" x2="11" y2="9.7"/>
+          <line x1="8.8" y1="7.5" x2="13.2" y2="7.5"/>
+          <line x1="9.45" y1="5.95" x2="12.55" y2="9.05"/>
+          <line x1="12.55" y1="5.95" x2="9.45" y2="9.05"/>
+          <line x1="8.85" y1="6.5"  x2="13.15" y2="8.5"/>
+          <line x1="13.15" y1="6.5" x2="8.85"  y2="8.5"/>
+          <line x1="9.5"  y1="9.35" x2="12.5"  y2="5.65"/>
+          <line x1="12.5" y1="9.35" x2="9.5"   y2="5.65"/>
+        </g>
+      </svg>
+      IN
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <button class="nav-menu-btn" aria-label="More options">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#5f6368">
+        <circle cx="12" cy="5"  r="1.5"/>
+        <circle cx="12" cy="12" r="1.5"/>
+        <circle cx="12" cy="19" r="1.5"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="login-container">
+
+  <!-- Google Pay Logo -->
+  <div class="logo-wrapper">
+    <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 24 6 A 18 18 0 0 1 42 24" fill="none" stroke="#4285F4" stroke-width="7" stroke-linecap="round"/>
+      <path d="M 42 24 A 18 18 0 0 1 24 42" fill="none" stroke="#34A853" stroke-width="7" stroke-linecap="round"/>
+      <path d="M 24 42 A 18 18 0 0 1 6 24"  fill="none" stroke="#FBBC05" stroke-width="7" stroke-linecap="round"/>
+      <path d="M 6 24 A 18 18 0 0 1 24 6"   fill="none" stroke="#EA4335" stroke-width="7" stroke-linecap="round"/>
+      <line x1="24" y1="24" x2="38" y2="24" stroke="#4285F4" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <h1 class="login-title">Sign in to  PayUpi</h1>
+  <p class="login-subtitle">Use your Google Account to continue</p>
+
+  <!-- Continue with Google Button -->
+  <button
+    class="google-btn"
+    (click)="onGoogleLogin()"
+    [disabled]="isLoading">
+
+    <!-- Google G Logo -->
+    <svg width="20" height="20" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+    </svg>
+
+    <span class="btn-label">
+      {{ isLoading ? 'Redirecting to Google...' : 'Continue with Google' }}
+    </span>
+
+    <!-- Arrow icon (hidden when loading) -->
+    <svg *ngIf="!isLoading" width="16" height="16" viewBox="0 0 24 24" fill="none"
+      stroke="#3c4043" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"/>
+      <polyline points="12 5 19 12 12 19"/>
+    </svg>
+
+    <!-- Spinner (shown when loading) -->
+    <div class="spinner" *ngIf="isLoading"></div>
+
+  </button>
+
+  <!-- Error Message -->
+  <div class="error-box" *ngIf="errorMessage">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d93025" stroke-width="2" stroke-linecap="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    <span>{{ errorMessage }}</span>
+  </div>
+
+  <!-- Info note -->
+  <p class="info-note">
+    You'll be redirected to Google to complete sign-in securely.
+    Your session is managed via a secure cookie.
+  </p>
+
+  <!-- Footer -->
+  <p class="login-footer">
+    By continuing, you agree to Google Pay's
+    <a href="#" class="link">Terms of Service</a> and
+    <a href="#" class="link">Privacy Policy</a>
+  </p>
+
+</div>

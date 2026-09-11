@@ -1,0 +1,160 @@
+<!-- ==========================================
+     OTP Verification Screen
+========================================== -->
+
+<div class="otp-page">
+
+  <!-- =========================
+       Top Navigation
+  ========================== -->
+  <div class="otp-topbar">
+
+    <button
+      class="icon-btn"
+      (click)="goBack()">
+
+      <span class="material-symbols-outlined">
+        arrow_back
+      </span>
+
+    </button>
+
+    <button class="icon-btn">
+
+      <span class="material-symbols-outlined">
+        more_vert
+      </span>
+
+    </button>
+
+  </div>
+
+  <!-- =========================
+       Main Content
+  ========================== -->
+
+  <div class="otp-body">
+
+    <!-- Google Logo -->
+
+    <div class="logo-wrapper">
+
+     <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 24 6 A 18 18 0 0 1 42 24" fill="none" stroke="#4285F4" stroke-width="7" stroke-linecap="round"/>
+      <path d="M 42 24 A 18 18 0 0 1 24 42" fill="none" stroke="#34A853" stroke-width="7" stroke-linecap="round"/>
+      <path d="M 24 42 A 18 18 0 0 1 6 24"  fill="none" stroke="#FBBC05" stroke-width="7" stroke-linecap="round"/>
+      <path d="M 6 24 A 18 18 0 0 1 24 6"   fill="none" stroke="#EA4335" stroke-width="7" stroke-linecap="round"/>
+      <line x1="24" y1="24" x2="38" y2="24" stroke="#4285F4" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+
+    </div>
+
+    <!-- Title -->
+
+    <h1 class="otp-title">
+
+      Verify your phone number
+
+    </h1>
+
+    <!-- Subtitle -->
+
+    <p class="otp-subtitle">
+
+      Enter the OTP sent to
+
+      <br>
+
+      <strong>{{ displayPhone }}</strong>
+
+    </p>
+
+    <!-- OTP Inputs -->
+
+    <div
+      class="otp-boxes"
+      [class.error-border]="errorMessage">
+
+       <input
+              *ngFor="let digit of otpDigits; let i = index"
+               #otpInput
+              type="text"
+              maxlength="1"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              class="otp-box"
+              [value]="digit"
+              (keydown)="onKeyDown($event, i)"
+              (paste)="onPaste($event)"
+>
+
+    </div>
+
+    <!-- Loading -->
+
+    <div
+      *ngIf="isLoading"
+      class="loading">
+
+      Verifying OTP...
+
+    </div>
+
+    <!-- Error -->
+
+    <div
+      *ngIf="errorMessage"
+      class="error-message">
+
+      {{ errorMessage }}
+
+    </div>
+
+    <!-- Success -->
+
+    <div
+      *ngIf="successMessage"
+      class="success-message">
+
+      {{ successMessage }}
+
+    </div>
+
+    <!-- Resend -->
+
+    <div class="resend-container">
+
+      <span
+        *ngIf="!canResend">
+
+        Request new OTP in
+
+        <b>
+
+          {{ timerDisplay }}
+
+        </b>
+
+      </span>
+
+      <button
+
+        *ngIf="canResend"
+
+        class="resend-button"
+
+        (click)="resendOtp()"
+
+        [disabled]="isResending">
+
+        {{ isResending ? 'Sending...' : 'Resend OTP' }}
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+

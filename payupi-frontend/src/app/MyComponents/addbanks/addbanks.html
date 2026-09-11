@@ -1,0 +1,257 @@
+<div class="bank-page">
+
+  <!-- ================= Search Bar ================= -->
+
+  <header class="search-header">
+
+    <div class="search-bar">
+
+      <button class="icon-btn" (click)="goBack()">
+
+        <span class="material-symbols-outlined">
+          arrow_back
+        </span>
+
+      </button>
+
+      <input
+        type="text"
+        placeholder="Search banks"
+        [(ngModel)]="searchText"
+        (ngModelChange)="onSearch()"
+      />
+
+      <button class="icon-btn">
+
+        <span class="material-symbols-outlined">
+          help
+        </span>
+
+      </button>
+
+      <button class="icon-btn">
+
+        <span class="material-symbols-outlined">
+          more_vert
+        </span>
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================= Hero ================= -->
+
+  <section class="hero-section">
+
+
+    <svg class="hero-illustration" viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+         <rect x="0" y="0" width="700" height="260" fill="#eaf1fb"/>
+          <circle cx="600" cy="55" r="16" fill="#f7c948"/>
+
+      <g transform="translate(569,25)">
+          <text x="30" y="38" font-size="22" text-anchor="middle" fill="#8a5a00" font-family="Arial">$</text>
+      </g> 
+        
+        <circle cx="650" cy="110" r="26" fill="#f6b93b"/>
+        <g transform="translate(620,80)">
+          <text x="30" y="38" font-size="22" text-anchor="middle" fill="#8a5a00" font-family="Arial">€</text>
+      </g> 
+
+        <ellipse cx="130" cy="140" rx="120" ry="55" fill="#ffffff"/>
+        <ellipse cx="320" cy="160" rx="150" ry="65" fill="#ffffff"/>
+        <ellipse cx="310" cy="190" rx="170" ry="90" fill="white"/>
+        <ellipse cx="520" cy="210" rx="180" ry="100" fill="white"/>
+        <ellipse cx="760" cy="200" rx="170" ry="90" fill="white"/>
+        <path d="M0 200 Q 150 150 350 190 T 700 180 V 260 H 0 Z" fill="#dcebff"/>
+        <path d="M0 225 Q 200 190 400 220 T 700 210 V 260 H 0 Z" fill="#cfe8d2"/>
+        <g transform="translate(430,90)">
+          <circle cx="30" cy="30" r="30" fill="#f7c948"/>
+          <text x="30" y="38" font-size="22" text-anchor="middle" fill="#8a5a00" font-family="Arial">₹</text>
+        </g>
+        <g transform="translate(500,70)">
+          <rect x="0" y="60" width="140" height="12" fill="#5b8def"/>
+          <rect x="10" y="20" width="10" height="40" fill="#5b8def"/>
+          <rect x="35" y="20" width="10" height="40" fill="#5b8def"/>
+          <rect x="60" y="20" width="10" height="40" fill="#5b8def"/>
+          <rect x="85" y="20" width="10" height="40" fill="#5b8def"/>
+          <rect x="110" y="20" width="10" height="40" fill="#5b8def"/>
+          <polygon points="0,20 70,0 140,20" fill="#5b8def"/>
+        </g>
+
+        <text
+        x="52"
+        y="40"
+        class="hero-title">
+
+        Add bank account
+
+      </text>
+
+      <text
+        x="52"
+        y="55"
+        class="hero-sub">
+
+        By continuing, PayFlow will add UPI IDs
+
+      </text>
+      <text
+        x="52"
+        y="64"
+        class="hero-sub">
+
+        and link UPI number for new users
+
+      </text>
+
+      <text
+        x="52"
+        y="81"
+        class="hero-link">
+
+        Change settings
+
+      </text>
+      </svg>
+
+    
+
+  </section>
+
+
+
+  <!-- ================= Loading ================= -->
+
+  <div
+    *ngIf="loading"
+    class="loading">
+
+    Loading Banks...
+
+  </div>
+
+
+  <!-- ================= Error ================= -->
+
+  <div
+    *ngIf="error"
+    class="error">
+
+    {{error}}
+
+  </div>
+
+
+
+  <!-- ================= Content ================= -->
+
+  <div
+    *ngIf="!loading && !error"
+    class="content">
+
+
+    <!-- ===== Popular Banks ===== -->
+
+    <h3 class="heading">
+
+      Select your bank
+
+    </h3>
+
+
+    <div class="popular-grid">
+
+      <div
+        class="popular-bank"
+        *ngFor="let bank of topBanks"
+        (click)="onTopBankClick(bank)">
+
+<div class="bank-logo">
+
+    <img
+        [src]="'/bank-logos/'+getBankLogo(bank.bankName)"
+         [alt]="bank.bankName"
+        class="logo-img"> 
+
+</div>
+
+        <span>
+
+          {{bank.bankName}}
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===== All Banks ===== -->
+
+    <h3 class="heading all-bank-heading">
+
+      All banks
+
+    </h3>
+
+
+    <div class="bank-list">
+
+      <div
+        *ngFor="let bank of filteredBanks"
+        class="bank-item"
+        (click)="onBankClick(bank)">
+
+    <div class="bank-avatar">
+
+    <img
+        [src]="'/bank-logos/'+ getBankLogo(bank.bankName)"
+        [alt]="bank.bankName"
+        class="logo-img">
+
+</div>
+
+        <span class="bank-name">
+
+          {{bank.bankName}}
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      *ngIf="filteredBanks.length==0"
+      class="no-bank">
+
+      No banks found
+
+    </div>
+
+
+
+    <!-- ===== Footer ===== -->
+
+    <div class="footer">
+
+      <span>POWERED BY</span>
+
+      <div class="upi">
+
+        UPI
+
+      </div>
+
+    </div>
+
+  </div>
+
+  
+
+</div>
