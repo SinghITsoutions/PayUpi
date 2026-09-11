@@ -1,0 +1,245 @@
+/* ==========================================
+   OTP Verification Screen — Styles
+   Compatible with both template versions
+========================================== */
+
+/* ---- Page wrapper ---- */
+.otp-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: 'Google Sans', Roboto, Arial, sans-serif;
+}
+
+/* ---- Top bar ---- */
+.otp-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 8px 4px;
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #3c4043;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+
+  .material-symbols-outlined {
+    font-size: 24px;
+    line-height: 1;
+     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+}
+
+/* ---- Body ---- */
+.otp-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 32px 40px;
+  gap: 16px;
+}
+
+/* ---- Logo ---- */
+.logo-wrapper {
+  margin-bottom: 0px;
+}
+
+
+/* ---- Title ---- */
+.otp-title {
+  font-size: 22px;
+  font-weight: 400;
+  color: #202124;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ---- Subtitle ---- */
+.otp-subtitle {
+  font-size: 14px;
+  color: #5f6368;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+
+  strong {
+    color: #202124;
+    font-weight: 500;
+  }
+}
+
+/* ---- OTP input boxes ---- */
+.otp-boxes {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+
+  /* Error state */
+  &.otp-boxes--error .otp-box,
+  &.error-border .otp-box {
+    border-color: #d93025;
+    box-shadow: 0 0 0 1px #d93025;
+  }
+}
+
+.otp-box {
+  width: 48px;
+  height: 56px;
+  border: 1.5px solid #dadce0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 22px;
+  font-weight: 500;
+  color: #202124;
+  text-align: center;
+  outline: none;
+  caret-color: #1a73e8;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  -webkit-appearance: none;
+  appearance: none;
+
+  /* Hide number spinners */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.25);
+  }
+
+  /* Filled state (second template) */
+  &.otp-box--filled {
+    border-color: #1a73e8;
+    background-color: #e8f0fe;
+  }
+}
+
+/* ---- Loading indicator ---- */
+.loading {
+  font-size: 13px;
+  color: #5f6368;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  /* Optional spinner — add a .spinner span inside */
+  .spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #dadce0;
+    border-top-color: #1a73e8;
+    border-radius: 50%;
+    animation: otp-spin 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+}
+
+/* ---- Error message ---- */
+.error-message {
+  font-size: 13px;
+  color: #d93025;
+  text-align: center;
+  background-color: #fce8e6;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 100%;
+  max-width: 320px;
+}
+
+/* ---- Success message ---- */
+.success-message {
+  font-size: 13px;
+  color: #137333;
+  text-align: center;
+  background-color: #e6f4ea;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 100%;
+  max-width: 320px;
+}
+
+/* ---- Resend row (second template class names) ---- */
+.otp-resend-row,
+.resend-container {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.otp-timer {
+  font-size: 13px;
+  color: #5f6368;
+
+  b {
+    color: #202124;
+    font-weight: 500;
+  }
+}
+
+/* Fallback for first template */
+.resend-container span {
+  font-size: 13px;
+  color: #5f6368;
+
+  b {
+    color: #202124;
+    font-weight: 500;
+  }
+}
+
+/* Resend button */
+.otp-resend-link,
+.resend-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a73e8;
+  font-family: inherit;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(26, 115, 232, 0.08);
+  }
+
+  &:active {
+    background-color: rgba(26, 115, 232, 0.16);
+  }
+
+  &:disabled,
+  &[disabled] {
+    color: #5f6368;
+    cursor: not-allowed;
+    background: none;
+  }
+}
+
+/* ---- Spinner animation ---- */
+@keyframes otp-spin {
+  to { transform: rotate(360deg); }
+}
