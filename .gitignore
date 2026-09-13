@@ -51,3 +51,6 @@ logs/
 
 # Environment variables / secrets
 .env
+
+# API Gateway logs
+/api-gateway/logs/

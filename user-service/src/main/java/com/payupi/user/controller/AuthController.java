@@ -9,6 +9,7 @@ import com.payupi.user.service.RegistrationCacheService;
 import com.payupi.user.util.CookieUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.Authentication;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,18 @@ public class AuthController {
       private final AuthService authService;
       private final RegistrationCacheService cacheService;
       private final RegistrationCacheService registrationCacheService;
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser(Authentication authentication) {
+
+        return ResponseEntity.ok(
+                Map.of(
+                        "authenticated", true,
+                        "email", authentication.getName()
+                )
+        );
+    }
+
 
     @PostMapping("/start-registration")
     public ResponseEntity<?> startRegistration(
