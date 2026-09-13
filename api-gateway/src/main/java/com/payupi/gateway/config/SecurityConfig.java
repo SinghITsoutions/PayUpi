@@ -1,35 +1,51 @@
 package com.payupi.gateway.config;
 
+import com.payupi.gateway.filter.JwtAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
-import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebFluxSecurity
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(
-            ServerHttpSecurity http) {
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http) throws Exception {
 
-        return http
-                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+        http
+                .csrf(csrf -> csrf.disable())
 
-                .authorizeExchange(exchange -> exchange
+                // Disable browser login/basic authentication
+                .httpBasic(httpBasic -> httpBasic.disable())
+                .formLogin(formLogin -> formLogin.disable())
 
-                        // Public authentication endpoints
-                        .pathMatchers(
-                                "/auth/**",
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/auth/start-registration",
+                                "/auth/verify-otp",
+                                "/auth/resend-otp",
                                 "/oauth2/**",
                                 "/login/**"
                         ).permitAll()
 
-                        // All other APIs require authentication
-                        .anyExchange().authenticated()
+
+                        // Everything else requires JWT
+                        .anyRequest().authenticated()
                 )
 
-                .build();
+                .addFilterBefore(
+                        jwtAuthenticationFilter,
+                        UsernamePasswordAuthenticationFilter.class
+                );
+
+        return http.build();
     }
 }

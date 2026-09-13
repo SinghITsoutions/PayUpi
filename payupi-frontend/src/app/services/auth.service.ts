@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs' ;
+import { map, catchError } from 'rxjs/operators';
 
 import { StartRegistrationRequest } from '../models/start-registration-request';
 import { StartRegistrationResponse } from '../models/start-registration-response';
@@ -24,7 +25,7 @@ import { StartRegistrationResponse } from '../models/start-registration-response
 })
 export class AuthService {
 
-  
+
   // private readonly BASE_URL = 'http://localhost:8080';
 
    /** Full endpoint path that matches your Spring Boot @RequestMapping */
@@ -99,7 +100,7 @@ export class AuthService {
   redirectToGoogleLogin(): void {
     window.location.href = `${this.apiUrl2}/oauth2/authorization/google`;
   }
- 
+
   /**
    * OTP flow (welcome screen)
    */
@@ -110,7 +111,7 @@ export class AuthService {
   //     { headers: this.headers, withCredentials: true }
   //   );
   // }
- 
+
   // verifyLoginOtp(phoneNumber: string, otp: string): Observable<any> {
   //   return this.http.post(
   //     `${this.apiUrl}/auth/verify-login-otp`,
@@ -132,8 +133,8 @@ export class AuthService {
 }
 
 
-            
- 
+
+
          /**
  * Verify OTP.
  */
@@ -166,6 +167,24 @@ resendOtp(): Observable<any> {
 
 }
 
+
+isAuthenticated(): Observable<boolean> {
+
+  return this.http.get<any>(
+    `${this.apiUrl}/me`,
+    {
+      withCredentials: true
+    }
+  ).pipe(
+    map(response => response.authenticated === true),
+    catchError(() => of(false))
+  );
+}
+
+
+
+
+
   }
 
-    
+

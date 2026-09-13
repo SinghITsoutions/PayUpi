@@ -12,7 +12,7 @@
 
         <!-- File Appender -->
 
-        <File name="File" fileName="logs/user-service.log">
+        <File name="File" fileName="api-gateway/logs/gateway-service.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"/>
         </File>
 
@@ -22,7 +22,7 @@
 
                <!-- Root Logger -->
                  <Root level="info">
-                         <AppenderRef ref="Console"/>
+<!--                         <AppenderRef ref="Console"/>-->
                          <AppenderRef ref="File"/>
                  </Root>
 

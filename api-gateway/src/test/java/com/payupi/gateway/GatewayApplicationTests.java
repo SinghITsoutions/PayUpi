@@ -1,4 +1,4 @@
-package com.upi.gateway;
+package com.payupi.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
