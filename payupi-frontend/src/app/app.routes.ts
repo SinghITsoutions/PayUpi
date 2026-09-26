@@ -13,7 +13,7 @@ export const routes: Routes = [
 // Public routes
 { path: '', component: WelcomeComponent },
 { path: 'login', component: LoginComponent },
-{ path: 'otp-verification', component: OtpVerificationComponent },
+
 
 // Protected routes
 {
@@ -26,7 +26,16 @@ canActivate: [authGuard]
 path: 'addBanks',
 component: BankListsComponent,
 canActivate: [authGuard]
+},
+
+{
+path: 'otp-verification',
+component: OtpVerificationComponent,
+canActivate: [authGuard]
 }
+
+
+
 
 // { path: 'bank-details/:id', component: BankDetailsComponent }
 ];

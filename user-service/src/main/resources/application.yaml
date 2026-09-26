@@ -2,48 +2,31 @@ spring:
   application:
     name: user-service
 
-
-# Database Connection Configuration
-
+  # Database Connection Configuration
   datasource:
-    url: ${{SPRING_DATASOURCE_URL}
+    url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
-
-
   # JPA & Hibernate Configuration
-
   jpa:
     hibernate:
       ddl-auto: create
     show-sql: true
-
-
-    # a dialect tells Hibernate how to generate SQL queries for a specific database.
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     database: POSTGRESQL
 
-
-#  redis
-
+  # Redis
   data:
     redis:
       host: ${SPRING_DATA_REDIS_HOST}
       port: ${SPRING_DATA_REDIS_PORT}
 
-
-
-
-
-
-
-#  OAuth2 with google
-
+  # OAuth2 with Google
   security:
     oauth2:
       client:
@@ -51,17 +34,15 @@ spring:
           google:
             client-id: ${GOOGLE_CLIENT_ID}
             client-secret: ${GOOGLE_CLIENT_SECRET}
-
-
+            scope:
+              - openid
+              - profile
+              - email
+            redirect-uri: "http://localhost:8080/login/oauth2/code/google"
 
 server:
   port: 8081
 
-
-  #jwt
-
+# JWT
 jwt:
   secret: ${JWT_SECRET}
-
-
-

@@ -10,7 +10,7 @@ import java.util.List;
 public interface BankRepository extends JpaRepository<Banks,Long> {
 
     @Query("""
-       SELECT new com.upi.bank.dto.BankResponse(
+       SELECT new com.payupi.bank.dto.BankResponse(
            b.id,
            b.bankName
        )
