@@ -1,40 +1,4 @@
 package com.payupi.user.config;
-//
-//
-//import org.springframework.context.annotation.Configuration;
-//
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig {
-//
-//   @Bean
-//public SecurityFilterChain securityFilterChain(HttpSecurity http)
-//        throws Exception {
-//
-//    http
-//            .csrf(csrf -> csrf.disable())
-//            .sessionManagement(session ->
-//                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//            .authorizeHttpRequests(auth -> auth
-//
-//                    .requestMatchers(
-//                            "/auth/register",
-//                            "/auth/login",
-//                            "/auth/verify-email")
-//                    .permitAll()
-//
-//                    .requestMatchers("/users/**")
-//                    .hasAnyRole("USER", "ADMIN")
-//
-//                    .anyRequest()
-//                    .authenticated()
-//            );
-//
-//    return http.build();
-//}
-//}
-
-
 
 import com.payupi.user.filter.JwtAuthenticationFilter;
 import com.payupi.user.security.OAuth2SuccessHandler;
@@ -69,21 +33,14 @@ public class SecurityConfig {
 
 
 
-//
-//                        .requestMatchers("/admin/**")
-//                        .hasRole("ADMIN")
-//
-//                        .anyRequest().authenticated()
-//                )
-//                .httpBasic(Customizer.withDefaults());
-//
-//        return http.build();
 
                 http
                         .csrf(csrf -> csrf.disable())
                         .cors(Customizer.withDefaults())
                         .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/auth/**",
+                                                 "/oauth2/**",
+                                         "/login/**").permitAll()
                                 .anyRequest().authenticated()
 
 

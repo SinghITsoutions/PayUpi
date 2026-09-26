@@ -23,6 +23,10 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
 
+              // Enable CORS
+                .cors(cors -> {})
+
+
                 // Disable browser login/basic authentication
                 .httpBasic(httpBasic -> httpBasic.disable())
                 .formLogin(formLogin -> formLogin.disable())
@@ -30,8 +34,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/auth/start-registration",
-                                "/auth/verify-otp",
-                                "/auth/resend-otp",
                                 "/oauth2/**",
                                 "/login/**"
                         ).permitAll()

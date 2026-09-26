@@ -1,8 +1,6 @@
 services:
 
-
   # PostgreSQL
-
   postgres:
     image: postgres:17
     container_name: postgres
@@ -30,9 +28,7 @@ services:
       retries: 10
 
 
-
   # Redis
-
   redis:
     image: redis:7
     container_name: redis
@@ -51,16 +47,11 @@ services:
       retries: 5
 
 
-
   # User Service
-
   user-service:
     build: ./user-service
     container_name: user-service
     restart: unless-stopped
-
-    ports:
-      - "8081:8081"
 
     environment:
 
@@ -91,16 +82,99 @@ services:
       - upi-network
 
 
+  # Bank Service
+  bank-service:
+    build: ./bank-service
+    container_name: bank-service
+    restart: unless-stopped
+
+    environment:
+
+      # PostgreSQL
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bank_db
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    networks:
+      - upi-network
+
+
+  # Notification Service
+  notification-service:
+    build: ./notification-service
+    container_name: notification-service
+    restart: unless-stopped
+
+    environment:
+
+      # PostgreSQL
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/user_db
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+
+      # Gmail
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_USERNAME: ${MAIL_USERNAME}
+      SPRING_MAIL_PASSWORD: ${MAIL_PASSWORD}
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: "true"
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: "true"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    networks:
+      - upi-network
+
+
+  # API Gateway
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    restart: unless-stopped
+
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      - user-service
+      - bank-service
+      - notification-service
+
+    networks:
+      - upi-network
+
+
+  # PayUpi Frontend
+  payupi-frontend:
+    build: ./payupi-frontend
+    container_name: payupi-frontend
+    restart: unless-stopped
+
+    ports:
+      - "4200:80"
+
+    depends_on:
+      - api-gateway
+
+    networks:
+      - upi-network
+
 
 # Volumes
-
 volumes:
   postgres_data:
 
 
-
 # Networks
-
 networks:
   upi-network:
     driver: bridge

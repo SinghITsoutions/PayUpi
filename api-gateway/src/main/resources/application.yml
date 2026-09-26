@@ -22,25 +22,35 @@ spring:
 
             # User Service
             - id: user-service
-              uri: http://localhost:8081
+              uri: http://user-service:8081
               predicates:
-                - Path=/auth/**,/users/**
+                - Path=/auth/**
+
+            - id: user-oauth2
+              uri: http://user-service:8081
+              predicates:
+                - Path=/oauth2/**
+
+            - id: user-oauth2-login
+              uri: http://user-service:8081
+              predicates:
+                - Path=/login/**
 
             # Bank Service
             - id: bank-service
-              uri: http://localhost:8082
+              uri: http://bank-service:8083
               predicates:
                 - Path=/bank/**
 
             # Notification Service
             - id: notification-service
-              uri: http://localhost:8083
+              uri: http://notification-service:8082
               predicates:
                 - Path=/notifications/**
 
             # Transaction Service
             - id: transaction-service
-              uri: http://localhost:8084
+              uri: http://transaction-service:8084
               predicates:
                 - Path=/transactions/**
 
@@ -49,3 +59,10 @@ spring:
 # ==========================
 jwt:
   secret: ${JWT_SECRET}
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.cloud.gateway: DEBUG

@@ -16,16 +16,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throws OAuth2AuthenticationException {
 
         OAuth2User oauthUser = super.loadUser(userRequest);
-
-//        String email = oauthUser.getAttribute("email");
-//        String name = oauthUser.getAttribute("name");
-//        String picture = oauthUser.getAttribute("picture");
-//        String googleId = oauthUser.getAttribute("sub");
-
-
-
-
-
         return oauthUser;
     }
 }

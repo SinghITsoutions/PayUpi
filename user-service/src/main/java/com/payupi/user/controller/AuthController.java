@@ -23,8 +23,7 @@ import java.util.Map;
 @Slf4j
 public class AuthController {
 
-//    @Autowired
-//    private JwtUtil jwtUtil;
+
 
       private final AuthService authService;
       private final RegistrationCacheService cacheService;

@@ -16,6 +16,6 @@ export class BankService {
   constructor(private http: HttpClient) {}
 
   getAllBanks(): Observable<Bank[]> {
-    return this.http.get<Bank[]>(`${this.baseUrl}/getAllBanks`);
+    return this.http.get<Bank[]>(`${this.baseUrl}/getAllBanks`,{ withCredentials: true });
   }
 }
